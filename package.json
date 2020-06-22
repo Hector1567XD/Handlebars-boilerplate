@@ -1,9 +1,10 @@
 {
-  "name": "viva-ballon",
+  "name": "Weckpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "rimraf dist && npx webpack --config webpack.config.js -d",
     "build": "rimraf dist && webpack --config webpack.config.js -p",
     "start": "webpack-dev-server --config webpack.config.js -d"
   },
@@ -19,20 +20,35 @@
   },
   "homepage": "https://gitlab.com/program-me/viva-ballon#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "5.13.0",
     "autoprefixer": "9.8.0",
+    "bootstrap": "4.5.0",
     "css-loader": "3.5.3",
+    "datatables.net": "1.10.21",
+    "es6-promise": "4.2.8",
     "file-loader": "6.0.0",
+    "fontawesome": "5.6.3",
+    "hammerjs": "2.0.8",
     "handlebars": "4.7.6",
     "handlebars-loader": "1.7.1",
     "html-webpack-plugin": "4.3.0",
     "image-webpack-loader": "6.0.0",
+    "jquery": "3.5.1",
+    "mdbootstrap": "4.19.0",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.14.1",
+    "node-waves": "0.7.6",
+    "popper.js": "1.16.1",
     "postcss-loader": "3.0.0",
     "rimraf": "3.0.2",
     "sass-loader": "8.0.2",
+    "underscore": "1.10.2",
     "webpack": "4.43.0",
     "webpack-cli": "3.3.11",
-    "webpack-dev-server": "3.11.0"
+    "webpack-dev-server": "3.11.0",
+    "wow.js": "1.2.2"
+  },
+  "devDependencies": {
+    "url-loader": "4.1.0"
   }
 }

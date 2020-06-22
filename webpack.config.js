@@ -1,24 +1,23 @@
 const path = require('path');
+
+// Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: {
+    app: './src/app.js',
+    home: './src/js/home.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/bundle.js'
+    filename: 'js/[name]-bundle.js',
   },
   plugins:[
     new HtmlWebpackPlugin({
-      template: './src/homepage.handlebars',
-      minify:{
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
+      template: './src/view/homepage.handlebars',
+      filename: 'home.html',
+      chunks: ['app','home']
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name]-styles.css',
@@ -39,20 +38,34 @@ module.exports = {
         loader: 'handlebars-loader'
       },
       {
-        test: /\.(jpg|png|gif|jpeg)$/,
+        test: /\.(jpg|png|gif|svg|jpeg)$/,
         use: [
           {
             loader:'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'static/',
+              outputPath: 'static/images',
               useRelativePath: true,
             }
           }
         ]
       },
       {
-        loader: 'image-webpack-loader',
+        test: /\.(ttf|otf|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'static/fonts',
+              publicPath: '../static/fonts',
+              useRelativePath: false
+            }
+          }
+        ]
+      },
+      {
+        loader: 'image-webpack-loader', // Minificador de imagenes
         options: {
           mozjpeg: {
             progressive: true,
@@ -67,7 +80,7 @@ module.exports = {
             speed: 4
           },
           gifsicle: {
-            interlaced: true,
+            interlaced: false,
           },
           // the webp option will enable WEBP
           webp: {
